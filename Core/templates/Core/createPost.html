@@ -1,0 +1,18 @@
+{% extends 'Core/base.html' %}
+{% load static %}
+{% block title %}Blog | Create Post{% endblock %}
+
+{% block content %}
+    <h1 class="text-body text-center fw-bold mb-4">Create Post</h1>
+
+    <form class="d-flex flex-column gap-2 mx-auto"
+      style="max-width: 300px;" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+    <button style="max-width: 90%; min-width: 200px;"
+            class="btn btn-danger mx-auto my-2"
+            type="submit">Создать
+    </button>
+</form>
+{% endblock %}

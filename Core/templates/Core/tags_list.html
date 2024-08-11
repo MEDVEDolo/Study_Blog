@@ -1,0 +1,14 @@
+{% extends 'Core/base.html' %}
+{% block title %}Blog | Tags{% endblock %}
+{% block content %}
+   <h1 class="text-center mb-3">Тэги</h1>
+   <div class="frc flex-wrap mw-700px mx-auto gap-2">
+       {% for tage in tags %}
+           <a href="{% url 'tags_detail' tage_id=tage.id  %}" 
+              class="px-3 py-2 fs-5 bg-black-25 rounded-3 text-dark 
+                     text-decoration-none disable-tap-select hover-scale-4">
+               {{ tage.name|title }}
+           </a>
+       {% endfor %}
+   </div>
+{% endblock %}

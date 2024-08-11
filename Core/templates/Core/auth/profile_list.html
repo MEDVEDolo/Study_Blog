@@ -1,0 +1,30 @@
+{% extends 'Core/base.html' %}
+{% load static %}
+{% block title %}Blog | Profiles{% endblock %}
+
+{% block content %}
+    <h1 class="text-body text-center fw-bold mb-4">Profiles</h1>
+
+    <div class="posts_container d-flex gap-3 flex-wrap justify-content-center mx-auto" 
+         style="max-width: 800px;">
+        {% for profile in profile_list %}
+
+                <div class="card" style="width: 250px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ profile.username }}</h5>
+                                <form action="{% url 'action_subscriptions' %}" method="POST" class="fr gap-1">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ profile.id }}" name="user_id">
+                                    {% if profile.username not in subs_list %}
+                                        <button class="btn-send-review btn btn-success" type="submit">Подписаться</button>
+                                        <input type="hidden" value="add" name="action">
+                                    {% else %}
+                                        <button class="btn-send-review btn btn-danger" type="submit">Отписаться</button>
+                                        <input type="hidden" value="remove" name="action">
+                                    {% endif %}
+                                </form>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% load static %}
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">Simple header</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="{% url 'posts' %}" class="nav-link">Посты</a></li>
+        <li class="nav-item"><a href="{% url 'subs_posts' %}" class="nav-link">Посты подписок</a></li>
+        <li class="nav-item"><a href="{% url 'request_posts' %}" class="nav-link">Посты по запросу</a></li>
+        <li class="nav-item"><a href="{% url 'createPost' %}" class="nav-link">Создать пост</a></li>
+        <li class="nav-item"><a href="{% url 'tags_list' %}" class="nav-link">Теги</a></li>
+        <li class="nav-item"><a href="{% url 'profile_list' %}" class="nav-link">Пользователи</a></li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="py-0"
+               href="{% url 'profile' %}">
+                <img width="20" height="20"
+                     style="filter: invert(0.75)"
+                     src="{% static 'Core/img/user.png' %}" alt="profile">
+            </a>
+        </li>
+        <li class="nav-item my-auto">
+            <a class="py-0"
+               href="{% url 'signout' %}">
+                <img width="24" height="24"
+                     style="filter: invert(0.75)"
+                     src="{% static 'Core/img/signout.png' %}" alt="signout">
+            </a>
+        </li>
+    {% else %}
+        <li class="nav-item my-auto">
+            <a class="btn btn-secondary py-0"
+               href="{% url 'signin' %}">
+                Sign In
+            </a>
+        </li>
+        <li class="nav-item my-auto">
+            <a class="btn btn-secondary py-0"
+               href="{% url 'signup' %}">
+                Sing Up
+            </a>
+        </li>
+    {% endif %}
+      </ul>
+    </header>
+  </div>

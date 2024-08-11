@@ -1,0 +1,32 @@
+{% extends 'Core/base.html' %}
+{% load static %}
+{% block title %}Blog | SignUp{% endblock %}
+
+{% block content %}
+    <h1 class="text-body text-center fw-bold mb-4">SignUp</h1>
+    {% if error %}
+        <p class="text-center text-danger fw-bold">{{ error }}</p>
+    {% endif %}
+    <div class="d-flex gap-3 flex-wrap justify-content-center mx-auto">
+        <form class="d-flex flex-column gap-2" method="post">
+            {% csrf_token %}
+            <input type="text" name="username"
+                   placeholder="Username"
+                   minlength="6" maxlength="50"
+                   class="form-control text-center">
+            <input type="text" name="email"
+                   placeholder="Email"
+                   minlength="4" maxlength="100"
+                   class="form-control text-center">
+            <input type="password" name="password"
+                   placeholder="Password"
+                   minlength="6" maxlength="100"
+                   class="form-control text-center">
+            <input type="password" name="repeat_password"
+                   placeholder="Repeat password"
+                   minlength="6" maxlength="100"
+                   class="form-control text-center">
+            <button class="btn btn-secondary">Confim</button>
+        </form>
+    </div>
+{% endblock %}

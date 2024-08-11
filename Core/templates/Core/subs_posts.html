@@ -1,0 +1,42 @@
+{% extends 'Core/base.html' %}
+{% load static %}
+{% block title %}Blog |Subs Post{% endblock %}
+
+{% block content %}
+    <h1 class="text-body text-center fw-bold mb-4">Subs Posts</h1>
+
+    <div class="posts_container d-flex gap-3 flex-wrap justify-content-center mx-auto" 
+         style="max-width: 800px;">
+        {% for post in posts %}
+                <div class="card" style="width: 250px;">
+                    <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.text }}</p>
+                        <p>{{ post.tag.name }}</p>
+                    </div>
+                    <div class="mt-3 w-100">
+                        <form action="{% url 'add_post_comment' %}" method="POST" class="fr gap-1">
+                            {% csrf_token %}
+                            <textarea class="w-100 form-control" type="text" name="comment_text"
+                                      placeholder="Напишите свой отзыв"></textarea>
+                            <button class="btn-send-review btn btn-secondary" type="submit">Отправить</button>
+                            <input type="hidden" value="{{ post.id }}" name="post_id">
+                        </form>
+                        <div class="fc gap-2 mt-3">
+                            <h3>Комментарии</h3>
+                            {% for comment in post.comments.all %}
+                                <div class="border-secondary rounded-2 border-1 border p-2">
+                                    <h6 class="fw-6">{{ comment.author.username }}</h6>
+                                    <p>{{ comment.text }}</p>
+                                    <div class="frsc mt-1 gap-2">
+                                        <span class="ms-auto text-secondary fs-6">{{ comment.created_at }}</span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+{% endblock %}

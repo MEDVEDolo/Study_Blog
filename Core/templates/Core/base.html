@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'Core/css/bootstrap.min.css' %}">
+    <link type="text/css" rel="stylesheet"
+    href="{% static 'Core/css/wide-classes.css' %}"/>
+</head>
+<body>
+    {% include 'Core/includes/header.html' %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    {% include 'Core/includes/footer.html' %}
+    <script src="{% static 'Core/scripts/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
